@@ -1,9 +1,10 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 
-function PinSetup({ setPin }) {
+function PinSetup({ setPin, setUsername }) {
   const [newPin, setNewPin] = useState("");
   const [confirmPin, setConfirmPin] = useState("");
+  const [name, setName] = useState("");
   const [error, setError] = useState("");
 
   const handleSubmit = (e) => {
@@ -12,8 +13,11 @@ function PinSetup({ setPin }) {
       setError("PIN must be 4 digits");
     } else if (newPin !== confirmPin) {
       setError("PINs do not match");
+    } else if (!name.trim()) {
+      setError("Please enter a username");
     } else {
       setPin(newPin);
+      setUsername(name.trim());
     }
   };
 
@@ -23,7 +27,14 @@ function PinSetup({ setPin }) {
         onSubmit={handleSubmit}
         className="bg-white p-8 rounded-lg shadow-md"
       >
-        <h2 className="text-2xl font-bold mb-4">Set up PIN</h2>
+        <h2 className="text-2xl font-bold mb-4">Set up your account</h2>
+        <input
+          type="text"
+          placeholder="Enter your username"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className="w-full p-2 mb-4 border rounded"
+        />
         <input
           type="password"
           placeholder="Enter 4-digit PIN"
@@ -45,7 +56,7 @@ function PinSetup({ setPin }) {
           type="submit"
           className="w-full bg-blue-500 text-white p-2 rounded"
         >
-          Set PIN
+          Set Up Account
         </button>
       </form>
     </div>
@@ -54,6 +65,7 @@ function PinSetup({ setPin }) {
 
 PinSetup.propTypes = {
   setPin: PropTypes.func.isRequired,
+  setUsername: PropTypes.func.isRequired,
 };
 
 export default PinSetup;

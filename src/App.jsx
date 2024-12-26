@@ -14,14 +14,15 @@ import useLocalStorage from "./hooks/useLocalStorage";
 
 function App() {
   const [pin, setPin] = useLocalStorage("pin", "");
+  const [username, setUsername] = useLocalStorage("username", "");
   const [isPinSet, setIsPinSet] = useState(false);
 
   useEffect(() => {
-    setIsPinSet(!!pin);
-  }, [pin]);
+    setIsPinSet(!!pin && !!username);
+  }, [pin, username]);
 
   if (!isPinSet) {
-    return <PinSetup setPin={setPin} />;
+    return <PinSetup setPin={setPin} setUsername={setUsername} />;
   }
 
   return (
@@ -30,11 +31,18 @@ function App() {
         <Navigation />
         <main className="container mx-auto px-4 py-8">
           <Routes>
-            <Route path="/" element={<Home pin={pin} />} />
+            <Route path="/" element={<Home pin={pin} username={username} />} />
             <Route path="/history" element={<History pin={pin} />} />
             <Route
               path="/settings"
-              element={<Settings pin={pin} setPin={setPin} />}
+              element={
+                <Settings
+                  pin={pin}
+                  setPin={setPin}
+                  username={username}
+                  setUsername={setUsername}
+                />
+              }
             />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>

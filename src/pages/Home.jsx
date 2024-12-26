@@ -1,11 +1,11 @@
+import PropTypes from "prop-types";
 import EmotionLogger from "../components/EmotionLogger";
 import WeatherInfo from "../components/WeatherInfo";
-import PropTypes from "prop-types";
 
-function Home({ pin }) {
+function Home({ pin, username }) {
   return (
     <div>
-      <h1 className="text-3xl font-bold mb-6">Mind App</h1>
+      <h1 className="text-3xl font-bold mb-6">Welcome, {username}!</h1>
       <WeatherInfo />
       <EmotionLogger pin={pin} />
     </div>
@@ -14,6 +14,7 @@ function Home({ pin }) {
 
 Home.propTypes = {
   pin: PropTypes.string.isRequired,
+  username: PropTypes.string.isRequired,
 };
 
 export default Home;
