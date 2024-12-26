@@ -1,9 +1,5 @@
 import { useState } from "react";
-import {
-  EmojiHappyIcon,
-  EmojiSadIcon,
-  EmojiNeutralIcon,
-} from "@heroicons/react/solid";
+import { FaSmile, FaMeh, FaFrown } from "react-icons/fa";
 import useLocalStorage from "../hooks/useLocalStorage";
 import useEncryption from "../hooks/useEncryption";
 import { getWeather } from "../utils/weather";
@@ -39,21 +35,21 @@ function EmotionLogger({ pin }) {
           onClick={() => setEmotion("happy")}
           className={`p-2 rounded-full ${emotion === "happy" ? "bg-yellow-200" : "bg-gray-200"}`}
         >
-          <EmojiHappyIcon className="h-10 w-10 text-yellow-500" />
+          <FaSmile className="h-10 w-10 text-yellow-500" />
         </button>
         <button
           type="button"
           onClick={() => setEmotion("neutral")}
           className={`p-2 rounded-full ${emotion === "neutral" ? "bg-gray-300" : "bg-gray-200"}`}
         >
-          <EmojiNeutralIcon className="h-10 w-10 text-gray-500" />
+          <FaMeh className="h-10 w-10 text-gray-500" />
         </button>
         <button
           type="button"
           onClick={() => setEmotion("sad")}
           className={`p-2 rounded-full ${emotion === "sad" ? "bg-blue-200" : "bg-gray-200"}`}
         >
-          <EmojiSadIcon className="h-10 w-10 text-blue-500" />
+          <FaFrown className="h-10 w-10 text-blue-500" />
         </button>
       </div>
       <textarea
