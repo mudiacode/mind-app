@@ -13,7 +13,7 @@ function Home({ pin }) {
 }
 
 Home.propTypes = {
-  pin: PropTypes.func.isRequired,
+  pin: PropTypes.string.isRequired,
 };
 
 export default Home;

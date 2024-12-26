@@ -70,7 +70,7 @@ function EmotionLogger({ pin }) {
 }
 
 EmotionLogger.propTypes = {
-  pin: PropTypes.func.isRequired,
+  pin: PropTypes.string.isRequired,
 };
 
 export default EmotionLogger;
