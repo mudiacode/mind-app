@@ -1,11 +1,24 @@
-import { useCallback } from "react";
-import { encrypt, decrypt } from "../utils/encryption";
+import CryptoJS from "crypto-js";
 
-function useEncryption(key) {
-  const encryptData = useCallback((data) => encrypt(data, key), [key]);
-  const decryptData = useCallback((data) => decrypt(data, key), [key]);
+export default function useEncryption(key) {
+  const encrypt = (text) => {
+    try {
+      return CryptoJS.AES.encrypt(text, key).toString();
+    } catch (error) {
+      console.error("Encryption failed:", error);
+      return "";
+    }
+  };
 
-  return { encrypt: encryptData, decrypt: decryptData };
+  const decrypt = (ciphertext) => {
+    try {
+      const bytes = CryptoJS.AES.decrypt(ciphertext, key);
+      return bytes.toString(CryptoJS.enc.Utf8);
+    } catch (error) {
+      console.error("Decryption failed:", error);
+      return "";
+    }
+  };
+
+  return { encrypt, decrypt };
 }
-
-export default useEncryption;

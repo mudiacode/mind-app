@@ -1,11 +1,30 @@
+import { useEffect } from "react";
 import { format } from "date-fns";
 import PropTypes from "prop-types";
 import useLocalStorage from "../hooks/useLocalStorage";
 import useEncryption from "../hooks/useEncryption";
 
 function EntryList({ pin }) {
-  const [entries] = useLocalStorage("entries", []);
+  const [entries, setEntries] = useLocalStorage("entries", []);
   const { decrypt } = useEncryption(pin);
+
+  useEffect(() => {
+    // Clean up corrupted entries
+    const cleanedEntries = entries.filter((entry) => {
+      try {
+        const decrypted = decrypt(entry);
+        JSON.parse(decrypted);
+        return true;
+      } catch (error) {
+        console.error("Removing corrupted entry:", error);
+        return false;
+      }
+    });
+
+    if (cleanedEntries.length !== entries.length) {
+      setEntries(cleanedEntries);
+    }
+  }, [entries, decrypt, setEntries]);
 
   const decryptedEntries = entries
     .map((entry) => {
