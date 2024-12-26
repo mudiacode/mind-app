@@ -1,4 +1,5 @@
 import { useState } from "react";
+import PropTypes from "prop-types";
 
 function PinSetup({ setPin }) {
   const [newPin, setNewPin] = useState("");
@@ -50,5 +51,9 @@ function PinSetup({ setPin }) {
     </div>
   );
 }
+
+PinSetup.propTypes = {
+  setPin: PropTypes.func.isRequired,
+};
 
 export default PinSetup;
