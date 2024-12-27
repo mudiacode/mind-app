@@ -1,5 +1,5 @@
-import EntryList from "../components/EntryList";
 import PropTypes from "prop-types";
+import EntryList from "../components/EntryList";
 
 function History({ pin }) {
   return (
