@@ -23,18 +23,19 @@ function WeatherInfo() {
     );
   }, []);
 
-  if (error) return <div className="text-red-500">{error}</div>;
-  if (!weather) return <div>Loading weather...</div>;
+  if (error) return <div className="text-latte-red">{error}</div>;
+  if (!weather)
+    return <div className="text-latte-subtext0">Loading weather...</div>;
 
   const { name, icon } = getWeatherInfo(weather.weatherCode);
 
   return (
-    <div className="bg-white p-4 rounded-lg shadow-md mb-6 flex items-center justify-between">
+    <div className="bg-latte-mantle p-4 rounded-lg shadow-md mb-6 flex items-center justify-between">
       <div className="flex items-center">
         <span className="text-4xl mr-2">{icon}</span>
-        <span className="text-lg">{name}</span>
+        <span className="text-lg text-latte-text">{name}</span>
       </div>
-      <div className="text-2xl font-bold">
+      <div className="text-2xl font-bold text-latte-mauve">
         {Math.round(weather.temperature)}°C
       </div>
     </div>
