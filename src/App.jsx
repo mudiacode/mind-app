@@ -1,3 +1,4 @@
+// Import necessary dependencies and components
 import { useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
@@ -20,11 +21,13 @@ import {
 } from "./utils/auth";
 
 function App() {
+  // State for PIN, username, and authentication
   const [pin, setPin] = useLocalStorage("pin", "");
   const [username, setUsername] = useLocalStorage("username", "");
   const [isPinSet, setIsPinSet] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(getAuthStatus());
 
+  // Effect to check if PIN is set and update last active timestamp
   useEffect(() => {
     setIsPinSet(!!pin && !!username);
 
@@ -32,15 +35,18 @@ function App() {
       setLastActiveTimestamp();
     };
 
+    // Add event listeners for user activity
     window.addEventListener("mousemove", handleActivity);
     window.addEventListener("keydown", handleActivity);
 
+    // Clean up event listeners
     return () => {
       window.removeEventListener("mousemove", handleActivity);
       window.removeEventListener("keydown", handleActivity);
     };
   }, [pin, username]);
 
+  // Effect to check session expiration
   useEffect(() => {
     const checkSession = () => {
       if (isSessionExpired()) {
@@ -49,19 +55,24 @@ function App() {
       }
     };
 
-    const intervalId = setInterval(checkSession, 60000); // Check every minute
+    // Check session every minute
+    const intervalId = setInterval(checkSession, 60000);
 
+    // Clean up interval
     return () => clearInterval(intervalId);
   }, []);
 
+  // Render PinSetup if PIN is not set
   if (!isPinSet) {
     return <PinSetup setPin={setPin} setUsername={setUsername} />;
   }
 
+  // Render PinEntry if not authenticated
   if (!isAuthenticated) {
     return <PinEntry pin={pin} setIsAuthenticated={setIsAuthenticated} />;
   }
 
+  // Main app structure
   return (
     <Router>
       <div className="min-h-screen bg-latte-base text-latte-text">
