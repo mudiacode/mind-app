@@ -1,6 +1,9 @@
 export const content = ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"];
 export const theme = {
   extend: {
+    fontFamily: {
+      sans: ["DM Sans", "sans-serif"],
+    },
     colors: {
       latte: {
         base: "#eff1f5",

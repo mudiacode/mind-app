@@ -57,7 +57,7 @@ function Settings({ setPin, setUsername }) {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-6">Settings</h1>
+      <h1 className="text-3xl text-center font-bold mb-6">Settings</h1>
 
       <form onSubmit={handleChangeUsername} className="mb-8">
         <h2 className="text-xl font-bold mb-4">Change Username</h2>
