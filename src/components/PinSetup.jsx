@@ -27,7 +27,7 @@ function PinSetup({ setPin, setUsername }) {
         onSubmit={handleSubmit}
         className="bg-white p-8 rounded-lg shadow-md"
       >
-        <h2 className="text-2xl font-bold mb-4">Set up your account</h2>
+        <h2 className="text-center text-2xl font-bold mb-4">Sign Up</h2>
         <input
           type="text"
           placeholder="Enter your username"
