@@ -3,12 +3,12 @@ import PropTypes from "prop-types";
 import useLocalStorage from "../hooks/useLocalStorage";
 import { setLastActiveTimestamp, setAuthStatus } from "../utils/auth";
 
-function Settings({ pin, setPin, username, setUsername }) {
+function Settings({ setPin, setUsername }) {
   const [newPin, setNewPin] = useState("");
   const [confirmPin, setConfirmPin] = useState("");
   const [newUsername, setNewUsername] = useState("");
   const [error, setError] = useState("");
-  const [entries, setEntries] = useLocalStorage("entries", []);
+  const [entries] = useLocalStorage("entries", []);
 
   useEffect(() => {
     setLastActiveTimestamp();
