@@ -5,7 +5,7 @@ import WeatherInfo from "../components/WeatherInfo";
 function Home({ pin, username }) {
   return (
     <div>
-      <h1 className="text-3xl font-bold mb-6 text-latte-mauve">
+      <h1 className="text-3xl text-center font-bold mb-6 text-latte-mauve">
         Welcome, {username}!
       </h1>
       <WeatherInfo />
