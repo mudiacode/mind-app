@@ -23,12 +23,12 @@ function PinEntry({ pin, setIsAuthenticated }) {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="min-h-screen flex items-center justify-center bg-latte-mantle">
       <form
         onSubmit={handleSubmit}
         className="bg-white p-8 rounded-lg shadow-md"
       >
-        <h2 className="text-2xl font-bold mb-4">Enter PIN to Access App</h2>
+        <h2 className="text-2xl text-center font-bold mb-4">Enter PIN</h2>
         {/* PIN input field */}
         <input
           type="password"
@@ -43,7 +43,7 @@ function PinEntry({ pin, setIsAuthenticated }) {
         {/* Submit button */}
         <button
           type="submit"
-          className="w-full bg-latte-blue text-white p-2 rounded"
+          className="w-full bg-latte-mauve text-white p-2 rounded"
         >
           Submit
         </button>
