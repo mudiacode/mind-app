@@ -2,7 +2,7 @@ import { useState } from "react";
 import { FaSmile, FaMeh, FaFrown } from "react-icons/fa";
 import useLocalStorage from "../hooks/useLocalStorage";
 import useEncryption from "../hooks/useEncryption";
-import { getWeather } from "../utils/weather";
+import { getWeather, getWeatherDescription } from "../utils/weather";
 import PropTypes from "prop-types";
 
 function EmotionLogger({ pin }) {
@@ -13,17 +13,27 @@ function EmotionLogger({ pin }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const weather = await getWeather();
-    const newEntry = {
-      date: new Date().toISOString(),
-      emotion,
-      comment,
-      weather,
-    };
-    const encryptedEntry = encrypt(JSON.stringify(newEntry));
-    setEntries([encryptedEntry, ...entries]);
-    setEmotion("");
-    setComment("");
+    try {
+      const position = await new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(resolve, reject);
+      });
+      const { latitude, longitude } = position.coords;
+      const weatherData = await getWeather(latitude, longitude);
+      const weatherDescription = getWeatherDescription(weatherData.weatherCode);
+
+      const newEntry = {
+        date: new Date().toISOString(),
+        emotion,
+        comment,
+        weather: `${weatherDescription}, ${weatherData.temperature}°C`,
+      };
+      const encryptedEntry = encrypt(JSON.stringify(newEntry));
+      setEntries([encryptedEntry, ...entries]);
+      setEmotion("");
+      setComment("");
+    } catch (error) {
+      console.error("Error submitting entry:", error);
+    }
   };
 
   return (
