@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getWeather, getWeatherDescription } from "../utils/weather";
+import { getWeather, getWeatherInfo } from "../utils/weather";
 
 function WeatherInfo() {
   const [weather, setWeather] = useState(null);
@@ -26,13 +26,17 @@ function WeatherInfo() {
   if (error) return <div className="text-red-500">{error}</div>;
   if (!weather) return <div>Loading weather...</div>;
 
+  const { name, icon } = getWeatherInfo(weather.weatherCode);
+
   return (
-    <div className="bg-white p-4 rounded-lg shadow-md mb-6">
-      <h2 className="text-xl font-bold mb-2">Current Weather</h2>
-      <p>Temperature: {weather.temperature}°C</p>
-      <p>Condition: {getWeatherDescription(weather.weatherCode)}</p>
-      <p>Wind Speed: {weather.windSpeed} km/h</p>
-      <p>Precipitation: {weather.precipitation} mm</p>
+    <div className="bg-white p-4 rounded-lg shadow-md mb-6 flex items-center justify-between">
+      <div className="flex items-center">
+        <span className="text-4xl mr-2">{icon}</span>
+        <span className="text-lg">{name}</span>
+      </div>
+      <div className="text-2xl font-bold">
+        {Math.round(weather.temperature)}°C
+      </div>
     </div>
   );
 }

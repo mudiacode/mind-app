@@ -2,7 +2,8 @@ import { useState } from "react";
 import { FaSmile, FaMeh, FaFrown } from "react-icons/fa";
 import useLocalStorage from "../hooks/useLocalStorage";
 import useEncryption from "../hooks/useEncryption";
-import { getWeather, getWeatherDescription } from "../utils/weather";
+import { getWeather, getWeatherInfo } from "../utils/weather";
+
 import PropTypes from "prop-types";
 
 function EmotionLogger({ pin }) {
@@ -19,13 +20,13 @@ function EmotionLogger({ pin }) {
       });
       const { latitude, longitude } = position.coords;
       const weatherData = await getWeather(latitude, longitude);
-      const weatherDescription = getWeatherDescription(weatherData.weatherCode);
+      const { name, icon } = getWeatherInfo(weatherData.weatherCode);
 
       const newEntry = {
         date: new Date().toISOString(),
         emotion,
         comment,
-        weather: `${weatherDescription}, ${weatherData.temperature}°C`,
+        weather: `${name} ${icon}, ${Math.round(weatherData.temperature)}°C`,
       };
       const encryptedEntry = encrypt(JSON.stringify(newEntry));
       setEntries([encryptedEntry, ...entries]);
@@ -43,21 +44,27 @@ function EmotionLogger({ pin }) {
         <button
           type="button"
           onClick={() => setEmotion("happy")}
-          className={`p-2 rounded-full ${emotion === "happy" ? "bg-yellow-200" : "bg-gray-200"}`}
+          className={`p-2 rounded-full ${
+            emotion === "happy" ? "bg-yellow-200" : "bg-gray-200"
+          }`}
         >
           <FaSmile className="h-10 w-10 text-yellow-500" />
         </button>
         <button
           type="button"
           onClick={() => setEmotion("neutral")}
-          className={`p-2 rounded-full ${emotion === "neutral" ? "bg-gray-300" : "bg-gray-200"}`}
+          className={`p-2 rounded-full ${
+            emotion === "neutral" ? "bg-gray-300" : "bg-gray-200"
+          }`}
         >
           <FaMeh className="h-10 w-10 text-gray-500" />
         </button>
         <button
           type="button"
           onClick={() => setEmotion("sad")}
-          className={`p-2 rounded-full ${emotion === "sad" ? "bg-blue-200" : "bg-gray-200"}`}
+          className={`p-2 rounded-full ${
+            emotion === "sad" ? "bg-blue-200" : "bg-gray-200"
+          }`}
         >
           <FaFrown className="h-10 w-10 text-blue-500" />
         </button>
