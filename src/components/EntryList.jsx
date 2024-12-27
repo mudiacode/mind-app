@@ -38,17 +38,26 @@ function EntryList({ pin }) {
     .filter(Boolean);
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold mb-4">Your Entries</h2>
+    <div className="bg-latte-mantle p-6 rounded-lg shadow-md">
+      <h2 className="text-2xl font-bold mb-4 text-latte-lavender">
+        Your Entries
+      </h2>
       {decryptedEntries.length === 0 ? (
-        <p>No entries yet.</p>
+        <p className="text-latte-subtext0">No entries yet.</p>
       ) : (
         decryptedEntries.map((entry, index) => (
-          <div key={index} className="mb-4 p-4 border rounded">
-            <p className="font-bold">{format(new Date(entry.date), "PPpp")}</p>
-            <p>Emotion: {entry.emotion}</p>
-            <p>Weather: {entry.weather}</p>
-            {entry.comment && <p>Comment: {entry.comment}</p>}
+          <div
+            key={index}
+            className="mb-4 p-4 border rounded bg-latte-surface0"
+          >
+            <p className="font-bold text-latte-mauve">
+              {format(new Date(entry.date), "PPpp")}
+            </p>
+            <p className="text-latte-text">Emotion: {entry.emotion}</p>
+            <p className="text-latte-text">Weather: {entry.weather}</p>
+            {entry.comment && (
+              <p className="text-latte-subtext1">Comment: {entry.comment}</p>
+            )}
           </div>
         ))
       )}

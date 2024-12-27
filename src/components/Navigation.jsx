@@ -2,20 +2,29 @@ import { Link } from "react-router-dom";
 
 function Navigation() {
   return (
-    <nav className="bg-blue-500 p-4">
+    <nav className="bg-latte-crust p-4">
       <ul className="flex justify-around">
         <li>
-          <Link to="/" className="text-white hover:text-gray-200">
+          <Link
+            to="/"
+            className="text-latte-lavender hover:text-latte-mauve transition-colors"
+          >
             Home
           </Link>
         </li>
         <li>
-          <Link to="/history" className="text-white hover:text-gray-200">
+          <Link
+            to="/history"
+            className="text-latte-lavender hover:text-latte-mauve transition-colors"
+          >
             History
           </Link>
         </li>
         <li>
-          <Link to="/settings" className="text-white hover:text-gray-200">
+          <Link
+            to="/settings"
+            className="text-latte-lavender hover:text-latte-mauve transition-colors"
+          >
             Settings
           </Link>
         </li>

@@ -64,7 +64,7 @@ function App() {
 
   return (
     <Router>
-      <div className="min-h-screen bg-gray-100">
+      <div className="min-h-screen bg-latte-base text-latte-text">
         <Navigation />
         <main className="container mx-auto px-4 py-8">
           <Routes>

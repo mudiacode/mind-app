@@ -38,47 +38,46 @@ function EmotionLogger({ pin }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold mb-4">How are you feeling?</h2>
+    <form
+      onSubmit={handleSubmit}
+      className="bg-latte-mantle p-6 rounded-lg shadow-md"
+    >
+      <h2 className="text-2xl font-bold mb-4 text-latte-lavender">
+        How are you feeling?
+      </h2>
       <div className="flex justify-around mb-4">
         <button
           type="button"
           onClick={() => setEmotion("happy")}
-          className={`p-2 rounded-full ${
-            emotion === "happy" ? "bg-yellow-200" : "bg-gray-200"
-          }`}
+          className={`p-2 rounded-full ${emotion === "happy" ? "bg-latte-yellow" : "bg-latte-surface0"}`}
         >
-          <FaSmile className="h-10 w-10 text-yellow-500" />
+          <FaSmile className="h-10 w-10 text-latte-text" />
         </button>
         <button
           type="button"
           onClick={() => setEmotion("neutral")}
-          className={`p-2 rounded-full ${
-            emotion === "neutral" ? "bg-gray-300" : "bg-gray-200"
-          }`}
+          className={`p-2 rounded-full ${emotion === "neutral" ? "bg-latte-blue" : "bg-latte-surface0"}`}
         >
-          <FaMeh className="h-10 w-10 text-gray-500" />
+          <FaMeh className="h-10 w-10 text-latte-text" />
         </button>
         <button
           type="button"
           onClick={() => setEmotion("sad")}
-          className={`p-2 rounded-full ${
-            emotion === "sad" ? "bg-blue-200" : "bg-gray-200"
-          }`}
+          className={`p-2 rounded-full ${emotion === "sad" ? "bg-latte-mauve" : "bg-latte-surface0"}`}
         >
-          <FaFrown className="h-10 w-10 text-blue-500" />
+          <FaFrown className="h-10 w-10 text-latte-text" />
         </button>
       </div>
       <textarea
         value={comment}
         onChange={(e) => setComment(e.target.value)}
         placeholder="Add a comment (optional)"
-        className="w-full p-2 mb-4 border rounded"
+        className="w-full p-2 mb-4 border rounded bg-latte-surface0 text-latte-text"
         rows="3"
       />
       <button
         type="submit"
-        className="w-full bg-blue-500 text-white p-2 rounded"
+        className="w-full bg-latte-mauve text-latte-base p-2 rounded hover:bg-latte-pink transition-colors"
       >
         Log Emotion
       </button>
