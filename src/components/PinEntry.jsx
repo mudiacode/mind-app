@@ -3,17 +3,21 @@ import PropTypes from "prop-types";
 import { setAuthStatus, setLastActiveTimestamp } from "../utils/auth";
 
 function PinEntry({ pin, setIsAuthenticated }) {
+  // State for entered PIN and error message
   const [enteredPin, setEnteredPin] = useState("");
   const [error, setError] = useState("");
 
+  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
     if (enteredPin === pin) {
+      // If PIN is correct, set authentication status and update timestamp
       setIsAuthenticated(true);
       setAuthStatus(true);
       setLastActiveTimestamp();
       setEnteredPin("");
     } else {
+      // If PIN is incorrect, show error message
       setError("Incorrect PIN");
     }
   };
@@ -25,6 +29,7 @@ function PinEntry({ pin, setIsAuthenticated }) {
         className="bg-white p-8 rounded-lg shadow-md"
       >
         <h2 className="text-2xl font-bold mb-4">Enter PIN to Access App</h2>
+        {/* PIN input field */}
         <input
           type="password"
           value={enteredPin}
@@ -33,10 +38,12 @@ function PinEntry({ pin, setIsAuthenticated }) {
           className="w-full p-2 mb-4 border rounded"
           maxLength="4"
         />
-        {error && <p className="text-red-500 mb-4">{error}</p>}
+        {/* Error message display */}
+        {error && <p className="text-latte-red mb-4">{error}</p>}
+        {/* Submit button */}
         <button
           type="submit"
-          className="w-full bg-blue-500 text-white p-2 rounded"
+          className="w-full bg-latte-blue text-white p-2 rounded"
         >
           Submit
         </button>
@@ -45,6 +52,7 @@ function PinEntry({ pin, setIsAuthenticated }) {
   );
 }
 
+// PropTypes for type checking
 PinEntry.propTypes = {
   pin: PropTypes.string.isRequired,
   setIsAuthenticated: PropTypes.func.isRequired,

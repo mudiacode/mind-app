@@ -2,19 +2,25 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 
 function PinSetup({ setPin, setUsername }) {
+  // State for new PIN, confirmation PIN, username, and error message
   const [newPin, setNewPin] = useState("");
   const [confirmPin, setConfirmPin] = useState("");
   const [name, setName] = useState("");
   const [error, setError] = useState("");
 
+  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
+    // Validate PIN: must be 4 digits
     if (newPin.length !== 4 || !/^\d+$/.test(newPin)) {
       setError("PIN must be 4 digits");
+      // Ensure PINs match
     } else if (newPin !== confirmPin) {
       setError("PINs do not match");
+      // Ensure username is not empty
     } else if (!name.trim()) {
       setError("Please enter a username");
+      // If all validations pass, set the PIN and username
     } else {
       setPin(newPin);
       setUsername(name.trim());
@@ -28,6 +34,7 @@ function PinSetup({ setPin, setUsername }) {
         className="bg-white p-8 rounded-lg shadow-md"
       >
         <h2 className="text-center text-2xl font-bold mb-4">Sign Up</h2>
+        {/* Username input */}
         <input
           type="text"
           placeholder="Enter your username"
@@ -35,6 +42,7 @@ function PinSetup({ setPin, setUsername }) {
           onChange={(e) => setName(e.target.value)}
           className="w-full p-2 mb-4 border rounded"
         />
+        {/* New PIN input */}
         <input
           type="password"
           placeholder="Enter 4-digit PIN"
@@ -43,6 +51,7 @@ function PinSetup({ setPin, setUsername }) {
           className="w-full p-2 mb-4 border rounded"
           maxLength="4"
         />
+        {/* Confirm PIN input */}
         <input
           type="password"
           placeholder="Confirm PIN"
@@ -51,10 +60,12 @@ function PinSetup({ setPin, setUsername }) {
           className="w-full p-2 mb-4 border rounded"
           maxLength="4"
         />
-        {error && <p className="text-red-500 mb-4">{error}</p>}
+        {/* Error message display */}
+        {error && <p className="text-latte-red mb-4">{error}</p>}
+        {/* Submit button */}
         <button
           type="submit"
-          className="w-full bg-blue-500 text-white p-2 rounded"
+          className="w-full bg-latte-blue text-white p-2 rounded"
         >
           Set Up Account
         </button>
@@ -63,6 +74,7 @@ function PinSetup({ setPin, setUsername }) {
   );
 }
 
+// PropTypes for type checking
 PinSetup.propTypes = {
   setPin: PropTypes.func.isRequired,
   setUsername: PropTypes.func.isRequired,

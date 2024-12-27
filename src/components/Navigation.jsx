@@ -2,8 +2,11 @@ import { Link } from "react-router-dom";
 
 function Navigation() {
   return (
+    // Navigation bar with custom background color
     <nav className="bg-latte-crust p-4">
+      {/* Unordered list for navigation items */}
       <ul className="flex justify-around">
+        {/* Home link */}
         <li>
           <Link
             to="/"
@@ -12,6 +15,7 @@ function Navigation() {
             Home
           </Link>
         </li>
+        {/* History link */}
         <li>
           <Link
             to="/history"
@@ -20,6 +24,7 @@ function Navigation() {
             History
           </Link>
         </li>
+        {/* Settings link */}
         <li>
           <Link
             to="/settings"

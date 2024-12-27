@@ -1,9 +1,12 @@
+// Import necessary hooks and utilities
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import useLocalStorage from "../hooks/useLocalStorage";
 import { setLastActiveTimestamp, setAuthStatus } from "../utils/auth";
 
+// Settings component definition
 function Settings({ pin, setPin, setUsername }) {
+  // State variables for component
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [enteredPin, setEnteredPin] = useState("");
   const [newPin, setNewPin] = useState("");
@@ -12,10 +15,12 @@ function Settings({ pin, setPin, setUsername }) {
   const [error, setError] = useState("");
   const [entries] = useLocalStorage("entries", []);
 
+  // Effect to update last active timestamp on component mount
   useEffect(() => {
     setLastActiveTimestamp();
   }, []);
 
+  // Handler for PIN submission
   const handlePinSubmit = (e) => {
     e.preventDefault();
     if (enteredPin === pin) {
@@ -27,6 +32,7 @@ function Settings({ pin, setPin, setUsername }) {
     }
   };
 
+  // Handler for changing username
   const handleChangeUsername = (e) => {
     e.preventDefault();
     if (newUsername.trim()) {
@@ -39,6 +45,7 @@ function Settings({ pin, setPin, setUsername }) {
     }
   };
 
+  // Handler for changing PIN
   const handleChangePin = (e) => {
     e.preventDefault();
     if (newPin.length !== 4 || !/^\d+$/.test(newPin)) {
@@ -55,6 +62,7 @@ function Settings({ pin, setPin, setUsername }) {
     }
   };
 
+  // Handler for exporting data
   const handleExportData = () => {
     const dataStr =
       "data:text/json;charset=utf-8," +
@@ -68,6 +76,7 @@ function Settings({ pin, setPin, setUsername }) {
     setLastActiveTimestamp();
   };
 
+  // Render PIN entry form if not authenticated
   if (!isAuthenticated) {
     return (
       <div className="container mx-auto px-4 py-8 bg-latte-base text-latte-text">
@@ -98,12 +107,14 @@ function Settings({ pin, setPin, setUsername }) {
     );
   }
 
+  // Render settings page if authenticated
   return (
     <div className="container mx-auto px-4 py-8 bg-latte-base text-latte-text">
       <h1 className="text-3xl text-center font-bold mb-6 text-latte-mauve">
         Settings
       </h1>
 
+      {/* Form for changing username */}
       <form onSubmit={handleChangeUsername} className="mb-8">
         <h2 className="text-xl font-bold mb-4 text-latte-lavender">
           Change Username
@@ -123,6 +134,7 @@ function Settings({ pin, setPin, setUsername }) {
         </button>
       </form>
 
+      {/* Form for changing PIN */}
       <form onSubmit={handleChangePin} className="mb-8">
         <h2 className="text-xl font-bold mb-4 text-latte-lavender">
           Change PIN
@@ -151,8 +163,10 @@ function Settings({ pin, setPin, setUsername }) {
         </button>
       </form>
 
+      {/* Display error messages */}
       {error && <p className="text-latte-red mb-4">{error}</p>}
 
+      {/* Section for exporting data */}
       <div className="mb-8">
         <h2 className="text-xl font-bold mb-4 text-latte-lavender">
           Export Data
@@ -168,6 +182,7 @@ function Settings({ pin, setPin, setUsername }) {
   );
 }
 
+// PropTypes for type checking
 Settings.propTypes = {
   pin: PropTypes.string.isRequired,
   setPin: PropTypes.func.isRequired,
